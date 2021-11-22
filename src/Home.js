@@ -3,7 +3,7 @@ import axios from 'axios'
 
 class Home extends Component {
     state = {
-        hatchways : []
+        hatchways: []
     }
 
     componentDidMount() {
@@ -17,10 +17,26 @@ class Home extends Component {
           .catch(err => console.log(err))
     }
 
+  
+    renderStudents() {
+        return this.state.hatchways.map((student, idx) => {
+            console.log(student.data.students);
+            return (
+                <div key={idx}>
+                    <p>{student.firstName}</p>
+                </div>
+            )
+        })
+    }
+    
+ 
     render() {
         return (
             <div>
                 <h1>Hatchways</h1>
+                <div>
+                    {/* {this.renderStudents()} */}
+                </div>
             </div>
         )
     }
