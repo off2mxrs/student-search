@@ -37,9 +37,9 @@ class Home extends Component {
             // console.log(grades(student[1].grades))
             return (
                 <div key={idx}>
-                    <ul>
-                        <li><img src={student[1].pic}></img></li>
-                        <li> <h1>{student[1].firstName} {student[1].lastName}</h1></li>
+                    <img src={student[1].pic}></img>
+                    <h1>{student[1].firstName} {student[1].lastName}</h1>
+                    <ul className="info">  
                         <li>Email: {student[1].email} </li>
                         <li>Company: {student[1].company}</li>
                         <li>Skill: {student[1].skill}</li>
