@@ -11,19 +11,23 @@ class Home extends Component {
 
         axios.get(url)
         .then( data => {
-            console.log(data);
-          this.setState({hatchways: data})
+            
+            let arr = Object.entries(data)
+            console.log(arr);
+            this.setState({
+                hatchways: arr
+            })
           })
           .catch(err => console.log(err))
     }
-
-  
+    
     renderStudents() {
         return this.state.hatchways.map((student, idx) => {
-            console.log(student.data.students);
+            // Object.values(student[1].students)
+            console.log(student[1].transitional);
             return (
                 <div key={idx}>
-                    <p>{student.firstName}</p>
+                    {/* <p>{student[1].students}</p> */}
                 </div>
             )
         })
@@ -35,7 +39,7 @@ class Home extends Component {
             <div>
                 <h1>Hatchways</h1>
                 <div>
-                    {/* {this.renderStudents()} */}
+                    {this.renderStudents()}
                 </div>
             </div>
         )
