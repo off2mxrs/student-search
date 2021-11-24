@@ -10,7 +10,7 @@ class Home extends Component {
 
         axios.get(url)
         .then( data => {
-            
+            // convert json object into array to fetch
             let arr = Object.entries(data.data.students)
             console.log(arr);
             this.setState({
@@ -23,17 +23,18 @@ class Home extends Component {
     renderStudents() {
         return this.state.hatchways.map((student, idx) => {
             // console.log(student[1].city);
+            // Find the average grade from grades array
             function grades(arr) {
                 let sum = 0
-                // for (let val in student[1].grades){
-                //     sum += student[1].grades[val]
-                // }
+                let cnt = 0
+                let ave = 0
                 for (let i = 0; i < arr.length; i++) {
                     sum = sum + parseInt(arr[i]);
+                    cnt++;
                 }
-                return sum
+                return ave = sum/cnt
             }
-            console.log(grades(student[1].grades))
+            // console.log(grades(student[1].grades))
             return (
                 <div key={idx}>
                     <ul>
@@ -42,7 +43,7 @@ class Home extends Component {
                         <li>Email: {student[1].email} </li>
                         <li>Company: {student[1].company}</li>
                         <li>Skill: {student[1].skill}</li>
-                        <li>Average: {student[1].grades}</li>
+                        <li>Average: {grades(student[1].grades)}%</li>
                     </ul>
                 </div>
             )
