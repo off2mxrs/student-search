@@ -37,14 +37,17 @@ class Home extends Component {
             // console.log(grades(student[1].grades))
             return (
                 <div key={idx}>
+                  <div className="card">
                     <img src={student[1].pic}></img>
-                    <h1>{student[1].firstName} {student[1].lastName}</h1>
-                    <ul className="info">  
+
+                    <ul className="list">  
+                        <li><h1>{student[1].firstName} {student[1].lastName}</h1></li>
                         <li>Email: {student[1].email} </li>
                         <li>Company: {student[1].company}</li>
                         <li>Skill: {student[1].skill}</li>
                         <li>Average: {grades(student[1].grades)}%</li>
                     </ul>
+                  </div>  
                 </div>
             )
         })
