@@ -22,11 +22,17 @@ class Home extends Component {
     
     renderStudents() {
         return this.state.hatchways.map((student, idx) => {
-           
-            console.log(student[1].city);
+            // console.log(student[1].city);
             return (
                 <div key={idx}>
-                    <p>{student[1].firstName}</p>
+                    <ul>
+                        <li><img src={student[1].pic}></img></li>
+                        <li> <h1>{student[1].firstName} {student[1].lastName}</h1></li>
+                        <li>Email: {student[1].email} </li>
+                        <li>Company: {student[1].company}</li>
+                        <li>Skill: {student[1].skill}</li>
+                        <li>Average: {student[1].average}</li>
+                    </ul>
                 </div>
             )
         })
@@ -36,7 +42,6 @@ class Home extends Component {
     render() {
         return (
             <div>
-                <h1>Hatchways</h1>
                 <div>
                     {this.renderStudents()}
                 </div>
