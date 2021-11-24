@@ -3,8 +3,10 @@ import axios from 'axios'
 
 class Home extends Component {
     state = {
-        hatchways: []
+        hatchways: [],
+        isTestsHidden: true,
     }
+    
     componentDidMount() {
         const url = 'https://api.hatchways.io/assessment/students'
 
@@ -20,6 +22,12 @@ class Home extends Component {
           .catch(err => console.log(err))
     }
     
+    toggleTests = () => {
+        this.setState({
+            isTestsHidden: !this.state.isTestsHidden
+        })
+    }
+
     renderStudents() {
         return this.state.hatchways.map((student, idx) => {
             // console.log(student[1].city);
@@ -47,7 +55,21 @@ class Home extends Component {
                         <li>Skill: {student[1].skill}</li>
                         <li>Average: {grades(student[1].grades)}%</li>
                     </ul>
-                  </div>  
+                  </div> 
+
+                  <button onClick={this.toggleTests}></button>
+                  {this.state.isTestsHidden ? "" : 
+                  <ul> 
+                      <li>Test 1: {student[1].grades[0]}%</li>
+                      <li>Test 2: {student[1].grades[1]}%</li>
+                      <li>Test 3: {student[1].grades[2]}%</li>
+                      <li>Test 4: {student[1].grades[3]}%</li>
+                      <li>Test 5: {student[1].grades[4]}%</li>
+                      <li>Test 6: {student[1].grades[5]}%</li>
+                      <li>Test 7: {student[1].grades[6]}%</li>
+                      <li>Test 8: {student[1].grades[7]}%</li>
+                 </ul>}
+                 <hr /> 
                 </div>
             )
         })
