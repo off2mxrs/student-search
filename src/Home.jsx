@@ -1,7 +1,9 @@
-import React, { Component} from 'react';
+import React, { Component } from 'react';
 import axios from 'axios'
 
+
 class Home extends Component {
+
     state = {
         hatchways: [],
         isTestsHidden: true,
@@ -29,6 +31,13 @@ class Home extends Component {
     }
 
     renderStudents() {
+        // return this.state.hatchways.filter((val)=> {
+        //     if (searchTerm == "") {
+        //         return val 
+        //     } else if (val.firstName.toLowerCase().includes(searchTerm.toLowerCase())) {
+        //         return val
+        //     }
+        // }).map((student, idx) => {
         return this.state.hatchways.map((student, idx) => {
             // console.log(student[1].city);
             // Find the average grade from grades array
@@ -75,7 +84,7 @@ class Home extends Component {
         })
     }
     
- 
+    
     render() {
         return (
             <div>
