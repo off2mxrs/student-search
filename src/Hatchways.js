@@ -1,31 +1,33 @@
 import React, {useState, useEffect} from "react"
 import axios from "axios"
 
-function Fetching() {
+function Hatchways() {
     const [students, setStudents] = useState([])
     const [searchTerm, setSearchTerm] = useState("")
     const [isOpen, setIsOpen] = useState([])
 
+    /// FETCH DATA ////////////////////
     useEffect(() => {
         axios.get('https://api.hatchways.io/assessment/students')
             .then(res => {
-                console.log(res.data)
+                // console.log(res.data)
                 setStudents(res.data.students)
             })
             .catch(err => 
                 console.error(err))
     }, [])
 
+    ///// FILTER & SEARCH //////////////////
     const getFilteredStudents = (searchTerm, students) => {
         if (!searchTerm) {
             return students
         }
         return students.filter(info => info.firstName.toLowerCase().includes(searchTerm.toLowerCase()))
     }
-
     const filteredStudents = getFilteredStudents(searchTerm, students)
-    console.log(filteredStudents)
+    // console.log(filteredStudents)
 
+    //Average Grade///////////////////
     function grades(arr) {
         let sum = 0
         let cnt = 0
@@ -37,9 +39,10 @@ function Fetching() {
         return ave = sum/cnt
     }
 
+    //Toggle by id //////////////////////
    const toggleActive= (id) => {
        if (isOpen.includes(id)) {
-           setIsOpen(isOpen.filter(sid => sid.id === id));
+           setIsOpen(isOpen.filter(stuId => stuId.id === id));
        } else {
            let newIsOpen = [...isOpen]
            newIsOpen.push(id)
@@ -63,9 +66,7 @@ function Fetching() {
                         <li>Average: {grades(student.grades)}%</li>
                      </ul>
 
-                     {/* <button className='toggle' onClick={() => setIsOpen(!isOpen)}>
-                         CLICK
-                     </button> */}
+                    {/* // EXPANDED LIST ////////////////// */}
                      <button className='toggle' onClick={() => {toggleActive(student.id)}}>
                          {isOpen.includes(student.id) ? '-' : '+'}
                      </button>
@@ -80,7 +81,8 @@ function Fetching() {
                       <li>Test 7: {student.grades[6]}%</li>
                       <li>Test 8: {student.grades[7]}%</li>
                      </ul>
-                     ) : null}                   
+                     ) : null}
+                     {/* ///////////////////////////////                    */}
                      <hr /> 
                     </li>
                 ))}
@@ -91,4 +93,4 @@ function Fetching() {
     )
 }
 
-export default Fetching
+export default Hatchways
