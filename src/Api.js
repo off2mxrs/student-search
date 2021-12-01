@@ -4,6 +4,7 @@ import axios from "axios"
 function Fetching() {
     const [students, setStudents] = useState([])
     const [searchTerm, setSearchTerm] = useState("")
+    const [isOpen, setIsOpen] = useState(false)
 
     useEffect(() => {
         axios.get('https://api.hatchways.io/assessment/students')
@@ -43,11 +44,30 @@ function Fetching() {
              <ul className="list">
                 {filteredStudents.map(student => 
                     <li key={student.id}><h1>{student.firstName} {student.lastName}</h1>
-                    <img src={student.pic}></img>
-                    <li>Email: {student.email} </li>
-                    <li>Company: {student.company}</li>
-                    <li>Skill: {student.skill}</li>
-                    <li>Average: {grades(student.grades)}%</li>
+                     <img src={student.pic}></img>
+                     <ul>
+                        <li>Email: {student.email} </li>
+                        <li>Company: {student.company}</li>
+                        <li>Skill: {student.skill}</li>
+                        <li>Average: {grades(student.grades)}%</li>
+                     </ul>
+
+                     <button className='toggle' onClick={() => setIsOpen(!isOpen)}>
+                         CLICK
+                     </button>
+                     {isOpen && 
+                     <ul> 
+                      <li>Test 1: {student.grades[0]}%</li>
+                      <li>Test 2: {student.grades[1]}%</li>
+                      <li>Test 3: {student.grades[2]}%</li>
+                      <li>Test 4: {student.grades[3]}%</li>
+                      <li>Test 5: {student.grades[4]}%</li>
+                      <li>Test 6: {student.grades[5]}%</li>
+                      <li>Test 7: {student.grades[6]}%</li>
+                      <li>Test 8: {student.grades[7]}%</li>
+                     </ul>
+                     }                   
+                     <hr /> 
                     </li>
                    
                )}
