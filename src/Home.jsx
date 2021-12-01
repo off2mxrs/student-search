@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 
-
+////////////////////////////////////////////////////////////////
+/////// INITAL ATTEMPT BEFORE REALIZING MUST BE A FUNCTIONAL COMPONENT //////
+////////////////////////////////////////////////////////////////
 class Home extends Component {
 
     state = {
@@ -31,13 +33,6 @@ class Home extends Component {
     }
 
     renderStudents() {
-        // return this.state.hatchways.filter((val)=> {
-        //     if (searchTerm == "") {
-        //         return val 
-        //     } else if (val.firstName.toLowerCase().includes(searchTerm.toLowerCase())) {
-        //         return val
-        //     }
-        // }).map((student, idx) => {
         return this.state.hatchways.map((student, idx) => {
             // console.log(student[1].city);
             // Find the average grade from grades array
