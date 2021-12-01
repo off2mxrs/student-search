@@ -3,7 +3,7 @@ import axios from "axios"
 
 function Fetching() {
     const [students, setStudents] = useState([])
-    const [searchTerm, setSearchTerm] = useState('')
+    const [searchTerm, setSearchTerm] = useState("")
 
     useEffect(() => {
         axios.get('https://api.hatchways.io/assessment/students')
@@ -19,7 +19,7 @@ function Fetching() {
         if (!searchTerm) {
             return students
         }
-        return students.filter(info => info.firstName.includes(searchTerm))
+        return students.filter(info => info.firstName.toLowerCase().includes(searchTerm.toLowerCase()))
     }
 
     const filteredStudents = getFilteredStudents(searchTerm, students)
@@ -28,7 +28,6 @@ function Fetching() {
         <div>
             <input className="search" type="text" placeholder="Search..." onChange={event => {setSearchTerm(event.target.value)}}/>
             <ul>
-                {/* {students.map(student => <li key={student.id}>{student.firstName}</li>)} */}
                 {filteredStudents.map(student => <li key={student.id}>{student.firstName}</li>)}
             </ul>
         </div>

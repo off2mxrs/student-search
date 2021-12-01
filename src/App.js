@@ -1,6 +1,4 @@
 import './App.css';
-import Home from './Home'
-import {useState} from 'react'
 import Api from './Api'
 
 function App() {
