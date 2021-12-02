@@ -5,6 +5,7 @@ function Hatchways() {
     const [students, setStudents] = useState([])
     const [searchTerm, setSearchTerm] = useState("")
     const [isOpen, setIsOpen] = useState([])
+    const [tags, setTags] = useState([]);
 
     /// FETCH DATA ////////////////////
     useEffect(() => {
@@ -50,6 +51,12 @@ function Hatchways() {
        }
    }
 
+   const addTag = (id, e) => {
+    if (e.key == "Enter") {
+      setTags([...tags, {id, value:e.target.value}]);
+      console.log(e.target.value);
+    }
+  };
 
     return (
         <div>
@@ -65,6 +72,16 @@ function Hatchways() {
                         <li>Skill: {student.skill}</li>
                         <li>Average: {grades(student.grades)}%</li>
                      </ul>
+
+                     {tags.filter(t => t.id === student.id).map((tag) => {
+                        return <p className="tags">{tag.value}</p>;
+                    })}
+                     <input
+                        onKeyDown={addTag.bind(this, student.id)}
+                        className="tag"
+                        type="text"
+                        placeholder="Add a tag"
+                     />
 
                     {/* // EXPANDED LIST ////////////////// */}
                      <button className='toggle' onClick={() => {toggleActive(student.id)}}>
