@@ -4,6 +4,7 @@ import axios from "axios"
 function Hatchways() {
     const [students, setStudents] = useState([])
     const [searchTerm, setSearchTerm] = useState("")
+    const [tagSearch, setTagSearch] = useState("")
     const [isOpen, setIsOpen] = useState([])
     const [tags, setTags] = useState([]);
 
@@ -26,7 +27,16 @@ function Hatchways() {
         return students.filter(info => info.firstName.toLowerCase().includes(searchTerm.toLowerCase()))
     }
     const filteredStudents = getFilteredStudents(searchTerm, students)
-    // console.log(filteredStudents)
+    console.log(filteredStudents)
+
+    const getFilteredTags = (tagSearch, tags) => {
+        if (tagSearch) {
+            return tags
+        }
+        return tags.filter(tagInfo => tagInfo.value.toLowerCase().includes(tagSearch.toLowerCase()))
+    }
+    const filteredTags = getFilteredTags(tagSearch, tags)
+    console.log(filteredTags)
 
     //Average Grade///////////////////
     function grades(arr) {
@@ -60,7 +70,8 @@ function Hatchways() {
 
     return (
         <div>
-            <input className="search" type="text" placeholder="Search..." onChange={event => {setSearchTerm(event.target.value)}}/>
+            <input className="search" type="text" placeholder="Search by name" onChange={event => {setSearchTerm(event.target.value)}}/>
+            <input className="search" type="text" placeholder="Search by tag" onChange={event => {setTagSearch(event.target.value)}}/>
             <div>
              <ul className="list">
                 {filteredStudents.map(student => (
@@ -73,9 +84,12 @@ function Hatchways() {
                         <li>Average: {grades(student.grades)}%</li>
                      </ul>
 
+                    
                      {tags.filter(t => t.id === student.id).map((tag) => {
                         return <p className="tags">{tag.value}</p>;
                     })}
+                  
+
                      <input
                         onKeyDown={addTag.bind(this, student.id)}
                         className="tag"
