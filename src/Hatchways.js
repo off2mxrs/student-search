@@ -14,11 +14,29 @@ function Hatchways() {
             .then(res => {
                 // console.log(res.data)
                 setStudents(res.data.students)
+                let newStudentData = []
+                res.data.students.map(student => {
+
+                    let addTags = student;
+                    addTags.tags = [];
+                    newStudentData.push(addTags);
+                })
+                setStudents(newStudentData)
+                console.log(newStudentData)
             })
             .catch(err => 
                 console.error(err))
     }, [])
 
+
+    const getFilteredTags = (tagSearch, tags) => {
+        if (!tagSearch) {
+            return tags
+        }
+        return tags.filter(tagInfo => tagInfo.tags.toLowerCase().includes(tagSearch.toLowerCase()))
+    }
+    
+    
     ///// FILTER & SEARCH //////////////////
     const getFilteredStudents = (searchTerm, students) => {
         if (!searchTerm) {
@@ -26,29 +44,26 @@ function Hatchways() {
         }
         return students.filter(info => info.firstName.toLowerCase().includes(searchTerm.toLowerCase()))
     }
-    const filteredStudents = getFilteredStudents(searchTerm, students)
+
+    let filteredTags = getFilteredTags(tagSearch, students)
+    console.log(filteredTags) 
+    
+     let filteredStudents = getFilteredStudents(searchTerm, students) 
     console.log(filteredStudents)
 
-    const getFilteredTags = (tagSearch, tags) => {
-        if (tagSearch) {
-            return tags
-        }
-        return tags.filter(tagInfo => tagInfo.value.toLowerCase().includes(tagSearch.toLowerCase()))
-    }
-    const filteredTags = getFilteredTags(tagSearch, tags)
-    console.log(filteredTags)
+   
 
     //Average Grade///////////////////
-    function grades(arr) {
-        let sum = 0
-        let cnt = 0
-        let ave = 0
-        for (let i = 0; i < arr.length; i++) {
-            sum = sum + parseInt(arr[i]);
-            cnt++;
-        }
-        return ave = sum/cnt
-    }
+    // function grades(arr) {
+    //     let sum = 0
+    //     let cnt = 0
+    //     let ave = 0
+    //     for (let i = 0; i < arr.length; i++) {
+    //         sum = sum + parseInt(arr[i]);
+    //         cnt++;
+    //     }
+    //     return ave = sum/cnt
+    // }
 
     //Toggle by id //////////////////////
    const toggleActive= (id) => {
@@ -61,13 +76,26 @@ function Hatchways() {
        }
    }
 
-   const addTag = (id, e) => {
-    if (e.key == "Enter") {
-      setTags([...tags, {id, value:e.target.value}]);
-      console.log(e.target.value);
+   const newTag = (str, index) => {
+        let setTags = [...students]
+       setTags[index].tags.push(str)
+     setStudents(setTags)
+     console.log(setTags);
     }
-  };
 
+
+
+  const addTag = (id, e) => {
+    students.map(studentWTag => {
+        if (e.key == "Enter") {
+        //  setStudents([...studentWTag.tags, {tags:e.target.value}]);
+         setStudents([...students, {id, tags:e.target.value, firstName:students.firstName, company:students.company}]);
+
+         console.log(studentWTag.tags);
+        }
+    })
+  };
+// console.log(students[0].city)
     return (
         <div>
             <input className="search" type="text" placeholder="Search by name" onChange={event => {setSearchTerm(event.target.value)}}/>
@@ -81,17 +109,18 @@ function Hatchways() {
                         <li>Email: {student.email} </li>
                         <li>Company: {student.company}</li>
                         <li>Skill: {student.skill}</li>
-                        <li>Average: {grades(student.grades)}%</li>
+                        <li>tags: {student.tags}</li>
+                        {/* <li>Average: {grades(student.grades)}%</li> */}
                      </ul>
 
                     
-                     {tags.filter(t => t.id === student.id).map((tag) => {
+                     {students.filter(t => t.id === student.tags).map((tag) => {
                         return <p className="tags">{tag.value}</p>;
                     })}
                   
-
+                        
                      <input
-                        onKeyDown={addTag.bind(this, student.id)}
+                        onKeyDown={addTag.bind(this, student)}
                         className="tag"
                         type="text"
                         placeholder="Add a tag"
@@ -117,6 +146,7 @@ function Hatchways() {
                      <hr /> 
                     </li>
                 ))}
+               
              </ul>
             </div>
         </div>
