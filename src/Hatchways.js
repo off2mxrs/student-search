@@ -4,9 +4,8 @@ import axios from "axios"
 function Hatchways() {
     const [students, setStudents] = useState([])
     const [searchTerm, setSearchTerm] = useState("")
-    const [tagSearch, setTagSearch] = useState("")
     const [isOpen, setIsOpen] = useState([])
-    const [tags, setTags] = useState([]);
+    
 
     /// FETCH DATA ////////////////////
     useEffect(() => {
@@ -28,14 +27,6 @@ function Hatchways() {
                 console.error(err))
     }, [])
 
-
-    const getFilteredTags = (tagSearch, tags) => {
-        if (!tagSearch) {
-            return tags
-        }
-        return tags.filter(tagInfo => tagInfo.tags.toLowerCase().includes(tagSearch.toLowerCase()))
-    }
-    
     
     ///// FILTER & SEARCH //////////////////
     const getFilteredStudents = (searchTerm, students) => {
@@ -44,9 +35,6 @@ function Hatchways() {
         }
         return students.filter(info => info.firstName.toLowerCase().includes(searchTerm.toLowerCase()))
     }
-
-    let filteredTags = getFilteredTags(tagSearch, students)
-    console.log(filteredTags) 
     
      let filteredStudents = getFilteredStudents(searchTerm, students) 
     console.log(filteredStudents)
@@ -76,30 +64,11 @@ function Hatchways() {
        }
    }
 
-//    const newTag = (str, index) => {
-//         let setTags = [...students]
-//        setTags[index].tags.push(str)
-//      setStudents(setTags)
-//      console.log(setTags);
-//     }
 
-
-
-  const addTag = (id, e) => {
-    students.map(studentWTag => {
-        if (e.key == "Enter") {
-        //  setStudents([...studentWTag.tags, {tags:e.target.value}]);
-         setStudents([...students, {id, tags:e.target.value, firstName:students.firstName, company:students.company}]);
-
-         console.log(studentWTag.tags);
-        }
-    })
-  };
 
     return (
         <div className="list">
             <input className="search" type="text" placeholder="Search by name" onChange={event => {setSearchTerm(event.target.value)}}/>
-            {/* <input className="search" type="text" placeholder="Search by tag" onChange={event => {setTagSearch(event.target.value)}}/> */}
             <div>
              <ul >
                 {filteredStudents.map(student => (
@@ -123,18 +92,6 @@ function Hatchways() {
                      </ul>
                      ) : null}
                      </ul>
-
-                    
-                     {students.filter(t => t.id === student.tags).map((tag) => {
-                        return <p className="tags">{tag.value}</p>;
-                    })}
-                  
-                     {/* <input
-                        onKeyDown={addTag.bind(this, student)}
-                        className="tag"
-                        type="text"
-                        placeholder="Add a tag"
-                     /> */}
 
                     {/* // EXPANDED LIST ////////////////// */}
                      <button className='toggle' onClick={() => {toggleActive(student.id)}}>

@@ -1,0 +1,45 @@
+const [tagSearch, setTagSearch] = useState("")
+const [tags, setTags] = useState([]);
+
+    // const getFilteredTags = (tagSearch, tags) => {
+    //     if (!tagSearch) {
+    //         return tags
+    //     }
+    //     return tags.filter(tagInfo => tagInfo.tags.toLowerCase().includes(tagSearch.toLowerCase()))
+    // }
+
+      // let filteredTags = getFilteredTags(tagSearch, students)
+    // console.log(filteredTags)
+
+    //    const newTag = (str, index) => {
+//         let setTags = [...students]
+//        setTags[index].tags.push(str)
+//      setStudents(setTags)
+//      console.log(setTags);
+//     }
+
+
+
+//   const addTag = (id, e) => {
+//     students.map(studentWTag => {
+//         if (e.key == "Enter") {
+//         //  setStudents([...studentWTag.tags, {tags:e.target.value}]);
+//          setStudents([...students, {id, tags:e.target.value, firstName:students.firstName, company:students.company}]);
+
+//          console.log(studentWTag.tags);
+//         }
+//     })
+//   };
+
+
+                     {/* <input
+                        onKeyDown={addTag.bind(this, student)}
+                        className="tag"
+                        type="text"
+                        placeholder="Add a tag"
+                     /> */}
+
+
+                     {students.filter(t => t.id === student.tags).map((tag) => {
+                        return <p className="tags">{tag.value}</p>;
+                    })}
