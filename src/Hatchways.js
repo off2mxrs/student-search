@@ -1,12 +1,14 @@
 import React, {useState, useEffect} from "react"
 import axios from "axios"
+import TagForm from './TagForm'
 
 function Hatchways() {
     const [students, setStudents] = useState([])
     const [searchTerm, setSearchTerm] = useState("")
     const [tagSearch, setTagSearch] = useState("")
     const [isOpen, setIsOpen] = useState([])
-    const [tags, setTags] = useState([]);
+    const [newTag, setNewTag] = useState("");
+    // const [tags, setTags] = useState([]);
 
     /// FETCH DATA ////////////////////
     useEffect(() => {
@@ -76,32 +78,48 @@ function Hatchways() {
        }
    }
 
-   const newTag = (str, index) => {
-        let setTags = [...students]
-       setTags[index].tags.push(str)
-     setStudents(setTags)
-     console.log(setTags);
-    }
+//    const newTag = (str, index) => {
+//         let setTags = [...students]
+//        setTags[index].tags.push(str)
+//      setStudents(setTags)
+//      console.log(setTags);
+//     }
 
 
 
-  const addTag = (id, e) => {
-    students.map(studentWTag => {
-        if (e.key == "Enter") {
-        //  setStudents([...studentWTag.tags, {tags:e.target.value}]);
-         setStudents([...students, {id, tags:e.target.value, firstName:students.firstName, company:students.company}]);
+//   const addTag = (id, e) => {
+//     students.map(studentWTag => {
+//     let newPush = []
+//         if (e.key == "Enter") {
+//             // let pushData = studentWTag
+//             // pushData.tags = ['1','2','3']
+//             // newPush.push(pushData.tags)
+//             // pushData.push()
+//         //  setStudents([...studentWTag.tags, {tags:e.target.value}]);
+//         //  setStudents([...students, {id, tags:e.target.value, firstName:students.firstName, company:students.company}]);
 
-         console.log(studentWTag.tags);
-        }
-    })
-  };
+//     }
+//      console.log(id);
+//     })
+//   };
 // console.log(students[0].city)
+
+
+
     return (
         <div>
             <input className="search" type="text" placeholder="Search by name" onChange={event => {setSearchTerm(event.target.value)}}/>
             <input className="search" type="text" placeholder="Search by tag" onChange={event => {setTagSearch(event.target.value)}}/>
             <div>
              <ul className="list">
+             {/* {students.filter(t => t.id).map((tag) => {
+                 let tagged = []
+                 tag.push('HELLO')
+                 console.log(tag.tags)
+                 return <p className="tags">{tag.id.tags}</p>;
+                 //  return console.log(tag.tags)
+            })} */}
+            
                 {filteredStudents.map(student => (
                     <li key={student.id}><h1>{student.firstName} {student.lastName}</h1>
                      <img src={student.pic}></img>
@@ -113,18 +131,33 @@ function Hatchways() {
                         {/* <li>Average: {grades(student.grades)}%</li> */}
                      </ul>
 
-                    
-                     {students.filter(t => t.id === student.tags).map((tag) => {
-                        return <p className="tags">{tag.value}</p>;
-                    })}
+                     {/* <form
+                        onSubmit={e => {
+                            e.preventDefault();
+                            addTag(newTag, index);
+                            setNewTag("");
+                            }}
+                    />
+                     
                   
-                        
                      <input
                         onKeyDown={addTag.bind(this, student)}
                         className="tag"
                         type="text"
                         placeholder="Add a tag"
-                     />
+                        value={newTag}
+                        onChange={e => {
+                        setNewTag(e.target.value);
+                         }}
+                     /> */}
+
+                        {tags.length > 0
+                        ? tags.map((tag, index) => {
+                            return <p key={index.toString()}> tag={tag} </p>;
+                            })
+                        : null}
+                        <TagForm />
+
 
                     {/* // EXPANDED LIST ////////////////// */}
                      <button className='toggle' onClick={() => {toggleActive(student.id)}}>
