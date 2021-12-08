@@ -54,16 +54,16 @@ function Hatchways() {
    
 
     //Average Grade///////////////////
-    // function grades(arr) {
-    //     let sum = 0
-    //     let cnt = 0
-    //     let ave = 0
-    //     for (let i = 0; i < arr.length; i++) {
-    //         sum = sum + parseInt(arr[i]);
-    //         cnt++;
-    //     }
-    //     return ave = sum/cnt
-    // }
+    function grades(arr) {
+        let sum = 0
+        let cnt = 0
+        let ave = 0
+        for (let i = 0; i < arr.length; i++) {
+            sum = sum + parseInt(arr[i]);
+            cnt++;
+        }
+        return ave = sum/cnt
+    }
 
     //Toggle by id //////////////////////
    const toggleActive= (id) => {
@@ -76,12 +76,12 @@ function Hatchways() {
        }
    }
 
-   const newTag = (str, index) => {
-        let setTags = [...students]
-       setTags[index].tags.push(str)
-     setStudents(setTags)
-     console.log(setTags);
-    }
+//    const newTag = (str, index) => {
+//         let setTags = [...students]
+//        setTags[index].tags.push(str)
+//      setStudents(setTags)
+//      console.log(setTags);
+//     }
 
 
 
@@ -95,43 +95,23 @@ function Hatchways() {
         }
     })
   };
-// console.log(students[0].city)
+
     return (
-        <div>
+        <div className="list">
             <input className="search" type="text" placeholder="Search by name" onChange={event => {setSearchTerm(event.target.value)}}/>
-            <input className="search" type="text" placeholder="Search by tag" onChange={event => {setTagSearch(event.target.value)}}/>
+            {/* <input className="search" type="text" placeholder="Search by tag" onChange={event => {setTagSearch(event.target.value)}}/> */}
             <div>
-             <ul className="list">
+             <ul >
                 {filteredStudents.map(student => (
-                    <li key={student.id}><h1>{student.firstName} {student.lastName}</h1>
+                    <li className='card' key={student.id}><h1>{student.firstName} {student.lastName}</h1>
                      <img src={student.pic}></img>
-                     <ul>
+                     <ul className='info'>
                         <li>Email: {student.email} </li>
                         <li>Company: {student.company}</li>
                         <li>Skill: {student.skill}</li>
-                        <li>tags: {student.tags}</li>
-                        {/* <li>Average: {grades(student.grades)}%</li> */}
-                     </ul>
-
-                    
-                     {students.filter(t => t.id === student.tags).map((tag) => {
-                        return <p className="tags">{tag.value}</p>;
-                    })}
-                  
-                        
-                     <input
-                        onKeyDown={addTag.bind(this, student)}
-                        className="tag"
-                        type="text"
-                        placeholder="Add a tag"
-                     />
-
-                    {/* // EXPANDED LIST ////////////////// */}
-                     <button className='toggle' onClick={() => {toggleActive(student.id)}}>
-                         {isOpen.includes(student.id) ? '-' : '+'}
-                     </button>
-                     {isOpen.includes(student.id) ? ( 
-                     <ul> 
+                        <li>Average: {grades(student.grades)}%</li>
+                        {isOpen.includes(student.id) ? ( 
+                     <ul className='tests'> 
                       <li>Test 1: {student.grades[0]}%</li>
                       <li>Test 2: {student.grades[1]}%</li>
                       <li>Test 3: {student.grades[2]}%</li>
@@ -142,8 +122,26 @@ function Hatchways() {
                       <li>Test 8: {student.grades[7]}%</li>
                      </ul>
                      ) : null}
+                     </ul>
+
+                    
+                     {students.filter(t => t.id === student.tags).map((tag) => {
+                        return <p className="tags">{tag.value}</p>;
+                    })}
+                  
+                     {/* <input
+                        onKeyDown={addTag.bind(this, student)}
+                        className="tag"
+                        type="text"
+                        placeholder="Add a tag"
+                     /> */}
+
+                    {/* // EXPANDED LIST ////////////////// */}
+                     <button className='toggle' onClick={() => {toggleActive(student.id)}}>
+                         {isOpen.includes(student.id) ? '-' : '+'}
+                     </button>
+                    
                      {/* ///////////////////////////////                    */}
-                     <hr /> 
                     </li>
                 ))}
                

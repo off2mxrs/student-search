@@ -2,7 +2,7 @@
 
 .search {
   margin-top: 20px;
-  width: 300px;
+  width: 95vw;
   height: 40px;
   font-size: 20px;
   padding-left: 10px;
@@ -12,6 +12,7 @@
   display: grid;
   grid-template: auto 2fr auto / auto 2fr auto;
   /* border-top: 2px solid rgba(0, 0, 0, 0.118); */
+  /* background-color: red; */
 }
 
 img {
@@ -24,11 +25,11 @@ img {
 }
 
 .list {
+  /* background-color: green; */
   grid-column:2/2;
   color: rgba(52, 52, 52, 0.694);
   font-family: 'Raleway', sans-serif;
   font-weight: bold;
-  list-style: none;
   margin: 10px;
   padding: 5px;
 }
@@ -38,9 +39,29 @@ h1 {
   font-size: 55px;
   margin-top: 5px;
   margin-bottom: 10px;
-  /* text-transform: capitalize; */
+  text-transform: uppercase;
 }
 
 li {
   margin: 8px;
+}
+
+.toggle {
+  background-color: rgba(255, 255, 255, 0);
+  border-color:rgba(140, 140, 140, 0);
+  width: 60px;
+  font-size: 100px;
+}
+
+.tests {
+  /* background-color: purple; */
+  margin-top: 25px;
+  font-size: 18px;
+  list-style: none;
+}
+
+.info {
+  /* background-color: orange; */
+  font-size: 18px;
+  list-style: none;
 }
